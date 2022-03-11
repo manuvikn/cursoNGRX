@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Todo } from '../../models/todo.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
 
-  constructor() { }
+  todoList: Array<Todo> = [];
+
+  constructor(private store: Store<{todo: Array<Todo>}>) { }
 
   ngOnInit(): void {
+    this.store.select('todo')
+      .subscribe((data: Array<Todo>) => this.todoList = data);
   }
 
 }

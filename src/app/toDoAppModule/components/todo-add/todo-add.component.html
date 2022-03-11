@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [formGroup]="todoForm">
     <h1>todos</h1>
-    <input class="new-todo" placeholder="What do you need to do?" autofocus>
+    <input class="new-todo" formControlName="todoInput" (keyup.enter)="submitTodoForm($event)" placeholder="What do you need to do?" autofocus>
 </header>

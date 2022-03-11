@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/appState.interface';
-import { dividir, multiplicar } from '../contador.actions';
+import { dividir, multiplicar } from '../../../redux/contador/contador.actions';
 
 @Component({
     selector: 'hijo-component',

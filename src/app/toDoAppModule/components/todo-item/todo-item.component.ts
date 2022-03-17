@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { toggle } from 'src/app/redux/todo/todo.actions';
+import { borrar, editar, toggle } from 'src/app/redux/todo/todo.actions';
 import { Todo } from '../../models/todo.model';
 
 @Component({
@@ -21,9 +21,6 @@ export class TodoItemComponent implements OnInit {
               private store: Store) { }
 
   ngOnInit(): void {
-
-    console.log(this.todo);
-    
     
     this.todoForm = this.fb.group({
 
@@ -33,9 +30,7 @@ export class TodoItemComponent implements OnInit {
     });
 
     this.todoForm.get('completado')?.valueChanges
-    .subscribe(data => {
-
-      console.log(data);
+    .subscribe(_data => {
       this.store.dispatch( toggle({id: this.todo.id}) );
       
     });
@@ -54,8 +49,16 @@ export class TodoItemComponent implements OnInit {
   terminarEdicion(): void {
 
     this.editando = false;
-    console.log(this.todoForm.get('texto')?.value);
-    
+    if (this.todoForm.get('texto')?.invalid) return;
+
+    const textoValue: string = this.todoForm.get('texto')?.value;
+
+    this.store.dispatch( editar({ id: this.todo.id, texto: textoValue }) );
+  }
+
+  borrar(): void {
+
+    this.store.dispatch( borrar({id: this.todo.id}) );
 
   }
 

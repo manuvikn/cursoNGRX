@@ -1,4 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { toggleAll } from '../redux/todo/todo.actions';
+import { Todo } from './models/todo.model';
 
 @Component({
     selector: 'to-do-app-component',
@@ -8,6 +11,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class ToDoAppComponent {
 
-    constructor() {}
+    constructor(private store: Store<{todo: Array<Todo>}>) {}
+
+    toggleAll(): void {
+
+        this.store.dispatch( toggleAll() );
+
+    }
 
 }

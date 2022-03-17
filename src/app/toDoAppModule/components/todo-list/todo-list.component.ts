@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { filtrosValidos } from 'src/app/redux/filtro/filtro.actions';
 import { Todo } from '../../models/todo.model';
 
 @Component({
@@ -10,12 +11,16 @@ import { Todo } from '../../models/todo.model';
 export class TodoListComponent implements OnInit {
 
   todoList: Array<Todo> = [];
+  filtro: filtrosValidos;
 
-  constructor(private store: Store<{todo: Array<Todo>}>) { }
+  constructor(private store: Store<{todo: Array<Todo>, filtro: filtrosValidos}>) { }
 
   ngOnInit(): void {
-    this.store.select('todo')
-      .subscribe((data: Array<Todo>) => this.todoList = data);
+    this.store
+        .subscribe(({todo, filtro}) => {
+          this.todoList = todo;
+          this.filtro = filtro;
+        });
   }
 
 }

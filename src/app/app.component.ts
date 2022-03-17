@@ -1,46 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as actions from './components/contador/contador.actions';
-import { AppState } from './interfaces/appState.interface';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'redux-app';
+export class AppComponent {
 
-  public contador: number = 0;
+  constructor(private router: Router) {}
 
-  constructor(private store: Store<AppState>) {
+  navigateTo( route?: string ): void {
 
-    this.contador = 10;
+    switch(route) {
 
-  }
+      case 'contador':
+        this.router.navigate(['contador-module']);
+        break;
+      
+      default:
+        break;
 
-  ngOnInit(): void {
-
-    this.store.select('contador')
-        .subscribe(contador => this.contador = contador);
-
-  }
-
-  incrementar(): void {
-
-    this.store.dispatch( actions.incrementar() );
-
-  }
-
-  decrementar(): void {
-
-    this.store.dispatch( actions.decrementar() );
-    
-  }
-
-  setContador( number: number ): void {
-
-    this.contador = number;
+    }
 
   }
 

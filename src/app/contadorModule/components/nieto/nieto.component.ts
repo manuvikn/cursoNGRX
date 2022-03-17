@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/appState.interface';
-import { reset } from '../contador.actions';
+import { reset } from '../../../redux/contador/contador.actions';
 
 @Component({
     selector: 'nieto-component',

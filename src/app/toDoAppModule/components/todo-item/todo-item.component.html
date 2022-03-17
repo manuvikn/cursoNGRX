@@ -1,0 +1,17 @@
+<li *ngIf="todo" [formGroup]="todoForm"
+[ngClass]="{'completed': todo.completado, 'editing': editando}">
+    <div class="view">
+
+
+        <input formControlName="completado" class="toggle" type="checkbox" checked>
+        <label
+        (dblclick)="editar()">{{ todo.texto }}</label>
+        <button (click)="borrar()" class="destroy"></button>
+
+
+    </div>
+    <input class="edit"
+    type="text" formControlName="texto"
+    #inputFisico
+    (blur)="terminarEdicion()">
+</li>
